@@ -1,0 +1,53 @@
+<%- include('partials/header') -%>
+
+<header class="container">
+    <div class="text-center">
+        <div class="row">
+            <h1><a href="/">Eventer</a></h1>
+            <%if(user) {%>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+            <%} %>
+        </div>
+    </div>
+</header>
+
+    <div class="d-flex row text-center">
+        <%for (let i of post) {%>
+            
+            <h5><%=i.title%></h2>
+            <div>Caption: <%=i.caption%></div>
+            <div>Country: <%=i.country%></div>
+            <div>State: <%=i.state%></div>
+            <div>City: <%=i.city%></div>
+            <div>Date and Time <%=i.dateTime%></div>
+            <div>Made by User: <%=poster%></div>
+            <div><%=i.attending%> Attending</div>
+        <%}%>
+    </div>
+    <p>people should also be able to decide the maximum number of attendee</p>
+ 
+    <%if (!user){%>
+    <div class="container justify-content-center">
+        <a href="/login" class="col btn btn-primary">Login</a>
+        <a href="/signup"class="col btn btn-primary">Sign Up</a>
+    </div>
+
+    <%} else if(String(post[0].user)==String(user._id)) {%>
+        <div class="container d-flex justify-content-center">
+            <form action="/post/deleteEvent/<%=post[0]._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-primary" type="submit">Delete Event</button>
+            </form>
+        </div>
+
+    <%} else {%>
+        <div class="container d-flex justify-content-center">
+            <form action="/post/attendEvent/<%=post[0]._id%>?_method=PUT" method="POST">
+                <button class="btn btn-primary" type="submit">Attend</button>
+            </form>
+        </div>
+    <%}%>
+
+    <p>going to make it so that people attending already can't see the attend button and instead see "already attending"</p>
+
+    <%- include('partials/footer') -%>

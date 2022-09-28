@@ -1,0 +1,36 @@
+<%- include('partials/header') -%>
+
+<header class="container">
+    <span>there should be a hamburger menu where you can sort by location or event category</span>
+    <div class="text-center">
+        <div class="row">
+            <h1><a href="/">Eventer</a></h1>
+            <%if(user) {%>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+            <%} %>
+            <%if(!user) {%>
+                <a href="/login">Login</a>
+                <a href="/signup">Sign Up</a>
+            <%} %>
+        </div>
+      <span>The #100Devs Event Maker</span>
+    </div>
+  </header>
+
+<h1 class="d-flex justify-content-center">Browsing</h1>
+
+<div class="row">
+    <%for (let i of posts) {%>
+        <a href="/post/getEvent/<%=i._id%>" class="col-6 border justify-content-row">
+        <h5><%=i.title%></h2>
+        <div>Desc: <%=i.description%></div>
+        <div>Country: <%=i.country%></div>
+        <div>State: <%=i.state%></div>
+        <div>City: <%=i.city%></div>
+        <div>Date and Time <%=i.dateTime%></div>
+        <div><%=i.attending%> Attending</div>
+        </a>
+    <%}%>
+</div>
+<%- include('partials/footer') -%>
