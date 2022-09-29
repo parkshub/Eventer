@@ -12,5 +12,6 @@ router.get('/getBrowse', postController.getBrowse)
 router.get('/getEvent/:id', postController.getEvent)
 router.post('/create', ensureAuth, postController.postCreate)
 router.put('/attendEvent/:id', postController.attendEvent)
+router.put('/unattendEvent/:id', postController.unattendEvent)
 
 module.exports = router

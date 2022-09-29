@@ -49,10 +49,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // attendee: {
-  //   type: Array,
-  //   default: []
-  // }
+  attendee: {
+    type: [mongoose.Schema.Types.ObjectId],
+    default: []
+  }
 });
 
 module.exports = mongoose.model("Post", PostSchema);

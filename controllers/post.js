@@ -27,11 +27,29 @@ module.exports = {
         try {
             await Post.findOneAndUpdate(
                 {_id: req.params.id},
-                {$inc: {attending: 1},},
-                // {$push: {attendee: req.user}}
+                {
+                    $inc: {attending: 1},
+                    $push: {attendee: req.user.id} // if doesn't work try puttig attendee in quotes
+                }
             )
             console.log(req.user)
             console.log('attendee added')
+            res.redirect(`/post/getEvent/${req.params.id}`)
+        } catch(err) {
+            console.log(err)
+        }
+    },
+    unattendEvent: async (req, res) => {
+        try {
+            await Post.findOneAndUpdate(
+                {_id: req.params.id},
+                {
+                    $inc: {attending: -1},
+                    $pullAll: {attendee: [req.user.id]}
+                }
+            )
+            console.log(req.user)
+            console.log('attendee removed')
             res.redirect(`/post/getEvent/${req.params.id}`)
         } catch(err) {
             console.log(err)
@@ -55,6 +73,7 @@ module.exports = {
                 dateTime: req.body.dateTime,
                 attending: 1,
                 user: req.user.id,
+                attendee: [req.user.id]
 
               });
               console.log("Post has been added!");
