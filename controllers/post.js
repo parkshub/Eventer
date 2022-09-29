@@ -32,7 +32,7 @@ module.exports = {
                     $push: {attendee: req.user.id} // if doesn't work try puttig attendee in quotes
                 }
             )
-            console.log(req.user)
+            // console.log(req.user)
             console.log('attendee added')
             res.redirect(`/post/getEvent/${req.params.id}`)
         } catch(err) {
@@ -48,7 +48,7 @@ module.exports = {
                     $pullAll: {attendee: [req.user.id]}
                 }
             )
-            console.log(req.user)
+            // console.log(req.user)
             console.log('attendee removed')
             res.redirect(`/post/getEvent/${req.params.id}`)
         } catch(err) {
@@ -59,7 +59,7 @@ module.exports = {
         try {
             // console.log(`req.file is ${req.file}`)
             // const result = await cloudinary.uploader.upload(req.file.path)
-            console.log(`req.body is ${req.body}`)
+            // console.log(`req.body is ${req.body}`)
             await Post.create({
                 // image: result.secure_url,
                 // cloudinaryId: result.public_id, // we need this id and url above to later delete the file from cloudinary
